@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#18392b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>Mary's 28-Day Fitness Plan</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">Keto Restart • 28 Days</p>
+      <h1>Stronger by Disney</h1>
+    </div>
+    <button id="libraryBtn" class="icon-btn" aria-label="Exercise library">?</button>
+  </header>
+
+  <main>
+    <section id="progressCard" class="progress-card"></section>
+
+    <nav class="day-nav" aria-label="Day navigation">
+      <button id="prevDay" class="nav-btn">‹</button>
+      <button id="todayBtn" class="today-btn">Today</button>
+      <button id="nextDay" class="nav-btn">›</button>
+    </nav>
+
+    <section id="dayCard" class="day-card"></section>
+
+    <section class="all-days">
+      <details>
+        <summary>Jump to another day</summary>
+        <div id="dayGrid" class="day-grid"></div>
+      </details>
+    </section>
+  </main>
+
+  <dialog id="exerciseDialog">
+    <div class="dialog-head">
+      <div>
+        <p class="eyebrow">Exercise Guide</p>
+        <h2 id="dialogTitle"></h2>
+      </div>
+      <button id="closeDialog" class="icon-btn" aria-label="Close">×</button>
+    </div>
+    <div id="dialogBody"></div>
+  </dialog>
+
+  <dialog id="libraryDialog">
+    <div class="dialog-head">
+      <div>
+        <p class="eyebrow">Reference</p>
+        <h2>Exercise Library</h2>
+      </div>
+      <button id="closeLibrary" class="icon-btn" aria-label="Close">×</button>
+    </div>
+    <input id="librarySearch" type="search" placeholder="Search exercises…" />
+    <div id="libraryList" class="library-list"></div>
+  </dialog>
+
+  <footer>
+    <p>Consistency beats intensity. Protect the Achilles, build the habit.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
