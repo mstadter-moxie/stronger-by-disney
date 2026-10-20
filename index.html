@@ -1,85 +1,17 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#18392b" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <title>Mary's 28-Day Fitness Plan</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="icon.svg" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <header class="app-header">
-    <div>
-      <p class="eyebrow">Keto Restart • 28 Days</p>
-      <h1>Stronger by Disney</h1>
-    </div>
-    <button id="libraryBtn" class="icon-btn" aria-label="Exercise library">?</button>
-  </header>
-
-  <main>
-    <section aria-label="Backup your workout history" style="padding:16px;margin:0 0 16px;background:#e8f3ed;border:2px solid #39765a;border-radius:14px">
-      <h2 style="margin:0 0 8px;font-size:1.15rem">Save your original workout history</h2>
-      <p style="margin:0 0 12px">Before upgrading to Stronger for Life, save a copy of your completed workouts and notes. This will not erase anything.</p>
-      <button id="exportLegacyBackup" type="button" style="padding:12px;border:0;border-radius:9px;background:#18392b;color:white;font-weight:bold">Download My Progress Backup</button>
-      <button id="showLegacyBackup" type="button" style="padding:12px;margin-top:8px;border:1px solid #18392b;border-radius:9px;background:white;color:#18392b">Show Backup Text (alternative)</button>
-      <p id="legacyBackupStatus" role="status" style="margin:12px 0 0"></p>
-      <div id="legacyBackupTextPanel" hidden style="margin-top:10px">
-        <p>Copy all the text below into a private note or file. Do not post it publicly.</p>
-        <textarea id="legacyBackupText" readonly spellcheck="false" aria-label="Workout backup JSON" style="box-sizing:border-box;width:100%;min-height:150px;font-size:12px"></textarea>
-        <button id="copyLegacyBackup" type="button" style="padding:12px;margin-top:6px">Copy Backup Text</button>
-      </div>
-    </section>
-
-    <section id="progressCard" class="progress-card"></section>
-
-    <nav class="day-nav" aria-label="Day navigation">
-      <button id="prevDay" class="nav-btn">‹</button>
-      <button id="todayBtn" class="today-btn">Today</button>
-      <button id="nextDay" class="nav-btn">›</button>
-    </nav>
-
-    <section id="dayCard" class="day-card"></section>
-
-    <section class="all-days">
-      <details>
-        <summary>Jump to another day</summary>
-        <div id="dayGrid" class="day-grid"></div>
-      </details>
-    </section>
-  </main>
-
-  <dialog id="exerciseDialog">
-    <div class="dialog-head">
-      <div>
-        <p class="eyebrow">Exercise Guide</p>
-        <h2 id="dialogTitle"></h2>
-      </div>
-      <button id="closeDialog" class="icon-btn" aria-label="Close">×</button>
-    </div>
-    <div id="dialogBody"></div>
-  </dialog>
-
-  <dialog id="libraryDialog">
-    <div class="dialog-head">
-      <div>
-        <p class="eyebrow">Reference</p>
-        <h2>Exercise Library</h2>
-      </div>
-      <button id="closeLibrary" class="icon-btn" aria-label="Close">×</button>
-    </div>
-    <input id="librarySearch" type="search" placeholder="Search exercises…" />
-    <div id="libraryList" class="library-list"></div>
-  </dialog>
-
-  <footer>
-    <p>Consistency beats intensity. Protect the Achilles, build the habit.</p>
-  </footer>
-
-  <script src="app.js"></script>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#18392b"><meta name="description" content="Your strength journey, at your own pace."><title>Stronger for Life</title><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css"></head>
+<body><header class="top"><div><div class="eyebrow">YOUR JOURNEY • YOUR PACE</div><h1>Stronger <em>for Life</em></h1></div><div id="userMenu" hidden><span id="userEmail"></span> <button id="signOut" class="quiet">Sign out</button></div></header>
+<main>
+<section id="setup" class="panel" hidden><h2>Connect your app</h2><p>To enable secure individual accounts and syncing, add your Supabase Project URL and publishable key to <code>config.js</code>, then run <code>supabase-schema.sql</code> in the Supabase SQL Editor.</p><p>See <strong>SETUP.md</strong> for the exact steps. No data is sent anywhere until configured.</p></section>
+<section id="auth" class="panel auth" hidden><p class="eyebrow">WELCOME</p><h2>Your strength journey starts here</h2><p>Start where you are. Choose what works for you. Get stronger at your own pace.</p><form id="authForm"><label>Email <input id="email" type="email" required autocomplete="email"></label><label>Password <input id="password" type="password" minlength="6" required autocomplete="current-password"></label><button id="authSubmit" type="submit">Sign in</button></form><button class="text-button" id="authSwitch">Need an account? Sign up</button><p id="authMessage" class="message" role="status"></p><p class="muted">Use a unique password. Confirm your email if your Supabase project requires it.</p></section>
+<div id="app" hidden>
+<section class="welcome panel"><div><p class="eyebrow">STRONGER BY…</p><h2 id="goalHeading">Your next chapter</h2><p id="goalSub" class="muted"></p></div><button id="editGoal" class="quiet">Edit goal</button></section>
+<section id="syncStatus" class="status" role="status" aria-live="polite"></section>
+<nav class="tabs" aria-label="App sections"><button data-tab="dashboard" class="active">Dashboard</button><button data-tab="workout">Workout</button><button data-tab="progress">Progress</button><button data-tab="settings">Settings</button></nav>
+<section id="dashboard" class="tab-panel"><div class="stats" id="stats"></div><div class="panel"><h2>This week</h2><p id="weekMessage" class="muted"></p><div id="weekDays" class="weekdays"></div></div><div class="panel"><h2>Choose your next workout</h2><p class="muted">Log a strength session or cardio at any time. Rest days are never counted as misses.</p><button id="startWorkout">Open workout</button></div></section>
+<section id="workout" class="tab-panel" hidden><div class="panel"><h2>Log a workout</h2><label>Date <input type="date" id="workoutDate"></label><label>Workout type <select id="workoutType"><option value="A">Strength A + cardio</option><option value="B">Strength B + cardio</option><option value="cardio">Cardio / movement</option><option value="mobility">Mobility / recovery</option></select></label><label id="modeLabel">Equipment <select id="workoutMode"><option value="ymca">Gym machines</option><option value="home">Home / free weights</option></select></label><div id="workoutTasks"></div><label>Notes <textarea id="workoutNotes" rows="3" placeholder="How it felt, personal bests, little wins…"></textarea></label><button id="saveWorkout">Save workout</button><p id="workoutMessage" class="message" role="status"></p></div></section>
+<section id="progress" class="tab-panel" hidden><div class="panel"><h2>Workout history</h2><div id="history"></div></div><div class="panel"><h2>Strength history</h2><div id="weightHistory"></div></div><div class="panel"><h2>My milestones</h2><form id="milestoneForm"><label>Celebrate a win <input id="milestoneText" maxlength="180" placeholder="Got up from the floor without hands!" required></label><button type="submit">Add milestone</button></form><div id="milestones"></div></div></section>
+<section id="settings" class="tab-panel" hidden><div class="panel"><h2>My weekly plan</h2><p class="muted">Pick the days you intend to work out. You can change them as life changes.</p><form id="settingsForm"><label>Workout days per week <select id="frequency"><option value="2">2 days</option><option value="3">3 days</option><option value="4">4 days</option><option value="5">5 days</option><option value="6">6 days</option></select></label><div class="small-label">Preferred workout days (optional; leave blank for flexible scheduling)</div><div id="preferredDays" class="day-select"></div><button type="submit">Save weekly plan</button></form></div><div class="panel"><h2>My goal</h2><form id="goalForm"><label>Stronger By… <input id="goalName" maxlength="90" placeholder="Disney, Summer, or For Life" required></label><label>Target date (optional) <input type="date" id="goalDate"></label><button type="submit">Save goal</button></form></div><div class="panel"><h2>Bring over your original progress</h2><p>Your old 28-day app stored its progress only in the browser where you used it. On that same browser and site address, you can import a snapshot into your private account.</p><p id="legacyStatus" class="muted"></p><button id="importLegacy" class="quiet">Import old 28-day history</button><label style="display:block;margin-top:12px">Or import a saved backup file (recommended for Home Screen apps): <input id="legacyFile" type="file" accept=".json,application/json"></label><button id="importLegacyFile" class="quiet" type="button">Import backup file</button><p id="importMessage" class="message" role="status"></p><button id="exportData" class="quiet">Download my account data (JSON)</button></div></section>
+</div>
+</main><footer>Start where you are. Choose what works for you. Get stronger at your own pace.</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script><script src="config.js" defer></script><script src="workout-data.js" defer></script><script src="app.js" defer></script></body></html>
