@@ -153,3 +153,38 @@ document.getElementById('closeLibrary').addEventListener('click',()=>document.ge
 document.getElementById('librarySearch').addEventListener('input',e=>renderLibrary(e.target.value));
 if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));
 render();
+
+// Non-destructive export of original local workout records.
+function legacyBackupJSON(){
+  const raw=localStorage.getItem('maryFitness28');
+  if(!raw) throw new Error('No saved workout history found in this app.');
+  const parsed=JSON.parse(raw);
+  if(!parsed || typeof parsed!=='object' || !parsed.days) throw new Error('Saved history does not contain workout days.');
+  return JSON.stringify(parsed,null,2);
+}
+function legacyBackupStatus(message){document.getElementById('legacyBackupStatus').textContent=message;}
+document.getElementById('exportLegacyBackup').addEventListener('click',()=>{
+  try{
+    const json=legacyBackupJSON();
+    const blob=new Blob([json],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download='stronger-by-disney-original-progress.json';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),30000);
+    legacyBackupStatus('Download requested. Check your phone’s Downloads/Files and open the file to confirm it contains your workout history. If nothing downloads, use Show Backup Text.');
+  }catch(e){legacyBackupStatus(e.message)}
+});
+document.getElementById('showLegacyBackup').addEventListener('click',()=>{
+  try{
+    const json=legacyBackupJSON();
+    document.getElementById('legacyBackupText').value=json;
+    document.getElementById('legacyBackupTextPanel').hidden=false;
+    const data=JSON.parse(json);
+    legacyBackupStatus('Found '+Object.keys(data.days).length+' saved day record(s). Copy all the text into a private note or file.');
+  }catch(e){legacyBackupStatus(e.message)}
+});
+document.getElementById('copyLegacyBackup').addEventListener('click',async()=>{
+  const box=document.getElementById('legacyBackupText');
+  try{await navigator.clipboard.writeText(box.value);legacyBackupStatus('Backup copied. Paste it into a private note and save it.');}
+  catch(e){box.focus();box.select();legacyBackupStatus('Text selected. Use your phone’s Copy command, then paste into a private note.');}
+});

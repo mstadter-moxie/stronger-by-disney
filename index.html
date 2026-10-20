@@ -22,6 +22,19 @@
   </header>
 
   <main>
+    <section aria-label="Backup your workout history" style="padding:16px;margin:0 0 16px;background:#e8f3ed;border:2px solid #39765a;border-radius:14px">
+      <h2 style="margin:0 0 8px;font-size:1.15rem">Save your original workout history</h2>
+      <p style="margin:0 0 12px">Before upgrading to Stronger for Life, save a copy of your completed workouts and notes. This will not erase anything.</p>
+      <button id="exportLegacyBackup" type="button" style="padding:12px;border:0;border-radius:9px;background:#18392b;color:white;font-weight:bold">Download My Progress Backup</button>
+      <button id="showLegacyBackup" type="button" style="padding:12px;margin-top:8px;border:1px solid #18392b;border-radius:9px;background:white;color:#18392b">Show Backup Text (alternative)</button>
+      <p id="legacyBackupStatus" role="status" style="margin:12px 0 0"></p>
+      <div id="legacyBackupTextPanel" hidden style="margin-top:10px">
+        <p>Copy all the text below into a private note or file. Do not post it publicly.</p>
+        <textarea id="legacyBackupText" readonly spellcheck="false" aria-label="Workout backup JSON" style="box-sizing:border-box;width:100%;min-height:150px;font-size:12px"></textarea>
+        <button id="copyLegacyBackup" type="button" style="padding:12px;margin-top:6px">Copy Backup Text</button>
+      </div>
+    </section>
+
     <section id="progressCard" class="progress-card"></section>
 
     <nav class="day-nav" aria-label="Day navigation">
